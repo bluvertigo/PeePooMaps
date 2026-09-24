@@ -2,6 +2,8 @@ import { FormEvent, useEffect, useState } from "react";
 import type { Character, EventKind, PooEvent } from "./domain";
 import { CHARACTER_ICONS } from "./domain";
 import { requestCurrentLocation } from "./location";
+import type { Coordinates } from "./location";
+import MapPicker from "./MapPicker";
 import { clearLocalData, deleteCharacter, getProfile, listCharacters, listEvents, saveCharacter, saveEvent, saveProfile } from "./storage";
 import { exportBackup, importBackup } from "./backup";
 import { backupToDrive } from "./driveBackup";
@@ -22,6 +24,7 @@ export default function App() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [online, setOnline] = useState(navigator.onLine);
+  const [coordinates, setCoordinates] = useState<Coordinates>();
   const [filterKind, setFilterKind] = useState<"all" | EventKind>("all");
   const [filterCharacter, setFilterCharacter] = useState("all");
   const [filterPeriod, setFilterPeriod] = useState<"all" | "today" | "week">("all");
@@ -40,11 +43,14 @@ export default function App() {
 
   async function addEvent(event: FormEvent) {
     event.preventDefault(); setLoading(true); setMessage("");
-    let coordinates;
-    try { coordinates = await requestCurrentLocation(); } catch { setMessage("GPS non disponibile: salvo comunque offline senza posizione."); }
+    if (!coordinates) {
+      setLoading(false);
+      setMessage("Scegli un punto sulla mappa prima di salvare l'evento.");
+      return;
+    }
     try {
       await saveEvent({ kind, occurredAt: new Date().toISOString(), ...coordinates, note: note.trim() || undefined, characterId: selected || undefined });
-      await refresh(); setNote(""); setMessage(`${labels[kind]} registrata${coordinates ? " con posizione." : " senza posizione."}`);
+      await refresh(); setNote(""); setCoordinates(undefined); setMessage(`${labels[kind]} registrata con posizione.`);
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Impossibile salvare l'evento.");
     } finally { setLoading(false); }
@@ -79,6 +85,9 @@ export default function App() {
       <label htmlFor="character">Personaggio</label><select id="character" value={selected} onChange={(event) => setSelected(event.target.value)}><option value="">Nessun personaggio</option>{characters.map((character) => <option value={character.id} key={character.id}>{character.icon} {character.name}</option>)}</select>
       <label htmlFor="note">Nota facoltativa</label><input id="note" value={note} onChange={(event) => setNote(event.target.value)} maxLength={140} placeholder="Come ti senti?" />
       <button className="primary" disabled={loading}>{loading ? "SALVATAGGIO…" : "SALVA EVENTO + GPS"}</button>
+      <label>Posizione dell'evento</label>
+      <MapPicker value={coordinates} onChange={setCoordinates} />
+      <button type="button" className="secondary location-button" onClick={() => void requestCurrentLocation().then(setCoordinates).catch(() => setMessage("Posizione GPS non disponibile: scegli il punto manualmente sulla mappa."))}>USA POSIZIONE ATTUALE</button>
     </form>{message && <p className="status" role="status">{message}</p>}</section>
     <section className="card"><h2>PERSONAGGI LOCALI</h2><form className="character-form" onSubmit={addCharacter}><input aria-label="Nome personaggio" value={newName} onChange={(event) => setNewName(event.target.value)} maxLength={32} placeholder="Nome (es. Leo)" /><select aria-label="Icona personaggio" value={icon} onChange={(event) => setIcon(event.target.value)}>{CHARACTER_ICONS.map((item) => <option key={item}>{item}</option>)}</select><button className="secondary">AGGIUNGI</button></form><div className="character-list">{characters.map((character) => <div className="character" key={character.id}><span className="avatar">{character.icon}</span><strong>{character.name}</strong><button className="icon-button" aria-label={`Elimina ${character.name}`} onClick={() => void removeCharacter(character)}>×</button></div>)}</div></section>
     <section className="card"><h2>PROFILO</h2><label htmlFor="nickname">Nickname (solo locale)</label><input id="nickname" value={nickname} onChange={(event) => { setNickname(event.target.value); void saveProfile(event.target.value); }} maxLength={40} placeholder="Il tuo nome" /></section>

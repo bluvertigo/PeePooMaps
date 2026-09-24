@@ -1,8 +1,8 @@
 # PeePooMaps
 
 PeePooMaps è una PWA local-first per registrare eventi di pipì o cacca, con timestamp,
-nota, posizione GPS opzionale e personaggi locali. Funziona offline: IndexedDB conserva
-eventi, profilo e personaggi sul dispositivo.
+nota, posizione scelta sulla mappa e personaggi locali. La posizione è obbligatoria:
+un evento non viene salvato finché non viene scelto un punto.
 
 ## Sviluppo
 
@@ -13,9 +13,10 @@ npm run dev
 
 La persistenza usa IndexedDB tramite Dexie con migrazione dalla versione MVP alla v2.
 La cancellazione di un personaggio è confermata e scollega i suoi eventi senza eliminarli.
-La geolocalizzazione viene richiesta solo quando si salva un evento e richiede HTTPS in
-produzione (o localhost). La mappa è limitata ai confini del mondo Leaflet; le piastrelle
-OpenStreetMap richiedono rete, mentre il salvataggio resta disponibile offline.
+Il pulsante GPS può proporre la posizione corrente e richiede HTTPS in produzione (o
+localhost). La mappa è limitata ai confini del mondo Leaflet. Con rete si può cliccare
+direttamente la mappa OpenStreetMap; offline compare una griglia minimale cliccabile per
+scegliere il punto e continuare a salvare senza piastrelle remote.
 
 ## Backup
 
