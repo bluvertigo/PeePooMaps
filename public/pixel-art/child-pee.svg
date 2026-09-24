@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" shape-rendering="crispEdges">
+  <!-- Outline and hair -->
+  <path fill="#17333d" d="M15 4h16v3h5v5h3v9h-4v4h-5v3h-3v4h6v4h4v7H25v-4h-4v4H8v-7h4v-4h4v-4h-5v-4H8v-8h3v-5h4z"/>
+  <path fill="#f0b84f" d="M16 7h13v3h5v7h-4v4H16v-3h-4v-6h4z"/>
+  <path fill="#f4c39b" d="M17 12h13v6h-3v4h-8v-3h-4v-5h2z"/>
+  <path fill="#17333d" d="M20 15h3v3h-3zM27 15h2v3h-2zM23 20h5v2h-5z"/>
+  <!-- Shirt and shorts -->
+  <path fill="#4d9e43" d="M16 24h14v4h4v7h-7v-5h-8v5h-7v-7h4z"/>
+  <path fill="#f4df55" d="M20 25h6v4h-6z"/>
+  <path fill="#3d6bb3" d="M15 35h8v5h-4v4h-8v-4h4zM27 35h6v5h4v4h-8v-4h-2z"/>
+  <!-- Water stream -->
+  <path fill="#8ee7ef" d="M38 28h3v3h-3zM40 31h3v3h-3zM42 34h3v4h-3z"/>
+  <path fill="#dffcff" d="M39 29h1v2h-1zM41 33h1v2h-1z"/>
+</svg>

@@ -214,8 +214,8 @@ export default function App() {
 
     <nav className="bottom-nav" aria-label="Azioni principali">
       <button className={menuOpen ? "nav-button active" : "nav-button"} onClick={() => { setMenuOpen(!menuOpen); setComposerOpen(false); }}><span>☰</span><small>MENU</small></button>
-      <button className="nav-button event-pee" onClick={() => openComposer("pee")}><span>💧</span><small>PIPÌ</small></button>
-      <button className="nav-button event-poop" onClick={() => openComposer("poop")}><span>💩</span><small>CACCA</small></button>
+      <button className="nav-button event-pee" aria-label="Registra pipì" onClick={() => openComposer("pee")}><img src="/pixel-art/child-pee.svg" alt="" /></button>
+      <button className="nav-button event-poop" aria-label="Registra cacca" onClick={() => openComposer("poop")}><img src="/pixel-art/poop-button.svg" alt="" /></button>
     </nav>
 
     {needsSetup && <div className="setup-backdrop"><section className="setup-dialog" role="dialog" aria-modal="true" aria-labelledby="setup-title">

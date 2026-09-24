@@ -1,4 +1,4 @@
-# Fase 4 — decisione su account e sincronizzazione
+# Fase 6 — decisione su account e sincronizzazione
 
 **Obiettivo:** decidere con evidenze se il progetto necessita di dati remoti e
 multi-dispositivo.

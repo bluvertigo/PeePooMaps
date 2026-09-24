@@ -1,4 +1,4 @@
-# Fase 5 — beta e rilascio
+# Fase 7 — beta e rilascio
 
 **Obiettivo:** pubblicare una beta controllata e misurare affidabilità senza
 introdurre tracking invasivo.

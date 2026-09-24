@@ -10,11 +10,12 @@ sincronizzazione remota prima di aver stabilizzato il dominio locale.
 | --- | --- | --- |
 | 0 | Fondazioni PWA e MVP locale | Completata |
 | 1 | Onboarding, mappa e navigazione principale | In corso |
-| 2 | Stabilizzazione dati, UX e test | Prossima |
-| 3 | Backup Google Drive | Prototipo implementato, da configurare e hardenizzare |
-| 4 | Accessibilità, privacy e installabilità | Da fare |
-| 5 | Preparazione backend e sincronizzazione | Decisione architetturale |
-| 6 | Beta e rilascio | Da fare |
+| 2 | Identità visuale pixel art e asset | In corso |
+| 3 | Stabilizzazione dati, UX e test | Prossima |
+| 4 | Backup Google Drive | Prototipo implementato, da configurare e hardenizzare |
+| 5 | Accessibilità, privacy e installabilità | Da fare |
+| 6 | Preparazione backend e sincronizzazione | Decisione architetturale |
+| 7 | Beta e rilascio | Da fare |
 
 ## Regole di avanzamento
 
@@ -28,6 +29,8 @@ sincronizzazione remota prima di aver stabilizzato il dominio locale.
 
 - [`00-onboarding-navigation.md`](./00-onboarding-navigation.md): avvio senza personaggi,
   mappa iniziale e azioni rapide per registrare gli eventi.
+- [`02-pixel-art.md`](./02-pixel-art.md): identità visuale pixel art, asset locali
+  e criteri di verifica responsive/offline.
 - [`01-stabilization.md`](./01-stabilization.md): qualità del MVP locale e gestione dati.
 - [`02-drive-backup.md`](./02-drive-backup.md): configurazione e hardening del backup Drive.
 - [`03-privacy-accessibility.md`](./03-privacy-accessibility.md): accessibilità, privacy e PWA.

@@ -1,4 +1,4 @@
-# Fase 2 — backup Google Drive
+# Fase 4 — backup Google Drive
 
 **Obiettivo:** offrire un backup volontario e best-effort senza trasformare Drive
 in un sistema di login applicativo.

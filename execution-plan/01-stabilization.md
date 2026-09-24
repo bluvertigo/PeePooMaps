@@ -1,4 +1,4 @@
-# Fase 1 — stabilizzazione del MVP locale
+# Fase 3 — stabilizzazione del MVP locale
 
 **Obiettivo:** rendere affidabili dati, flussi principali e regressioni prima di
 aggiungere funzionalità remote.

@@ -1,4 +1,4 @@
-# Fase 3 — privacy, accessibilità e installabilità
+# Fase 5 — privacy, accessibilità e installabilità
 
 **Obiettivo:** rendere l’app pronta per utenti reali senza cambiare il modello
 local-first.
