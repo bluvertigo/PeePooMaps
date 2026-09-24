@@ -25,7 +25,6 @@ export default function MapPicker({ value, onChange }: MapPickerProps) {
   const element = useRef<HTMLDivElement>(null);
   const map = useRef<import("leaflet").Map>();
   const marker = useRef<import("leaflet").Marker>();
-  const fallback = useRef<HTMLDivElement>(null);
   const [online, setOnline] = useState(navigator.onLine);
 
   useEffect(() => {
@@ -84,7 +83,6 @@ export default function MapPicker({ value, onChange }: MapPickerProps) {
       {online && <div className="map-picker" ref={element} aria-label="Seleziona il punto dell'evento sulla mappa" />}
       <div
         className={online ? "offline-picker" : "offline-picker visible"}
-        ref={fallback}
         role="application"
         aria-label="Mappa offline minimale: clicca per selezionare il punto"
         onClick={(event) => onChange(coordinatesFromPoint(event, event.currentTarget))}

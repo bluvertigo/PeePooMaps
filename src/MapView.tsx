@@ -23,7 +23,13 @@ export default function MapView({ events }: MapViewProps) {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(map);
       points.forEach((item) => {
-        L.marker([item.latitude!, item.longitude!])
+        const icon = L.icon({
+          iconUrl: item.kind === "pee" ? "/pixel-art/child-pee.svg" : "/pixel-art/poop-button.svg",
+          iconSize: [42, 42],
+          iconAnchor: [21, 38],
+          popupAnchor: [0, -38]
+        });
+        L.marker([item.latitude!, item.longitude!], { icon })
           .addTo(map!)
           .bindPopup(item.kind === "pee" ? "Pipì" : "Cacca");
       });

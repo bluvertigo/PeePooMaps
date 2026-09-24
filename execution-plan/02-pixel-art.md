@@ -30,6 +30,16 @@ lo schema IndexedDB o i flussi funzionali dell'app.
 - [x] Restyling di form, filtri, storico, messaggi e azioni distruttive.
 - [ ] Valutare icone pixel art per personaggi e stati invece delle sole emoji.
 
+## Mappa vettoriale
+
+- [x] Sostituire Leaflet con MapLibre GL JS.
+- [x] Usare OpenFreeMap come sorgente vettoriale OSM senza API key.
+- [x] Applicare una palette personalizzata coerente con PeePooMaps a sfondo,
+      aree, acqua, strade e testi.
+- [x] Riutilizzare le icone pixel art degli eventi come marker MapLibre.
+- [x] Mantenere l'attribuzione OSM/OpenFreeMap visibile sulla mappa.
+- [ ] Valutare tile self-hosted e offline completo prima del rilascio pubblico.
+
 ## Accessibilità e verifica
 
 - [ ] Controllare contrasto tra testi, pannelli e sfondo.
@@ -44,5 +54,7 @@ lo schema IndexedDB o i flussi funzionali dell'app.
 - La mappa resta il punto di ingresso e la barra inferiore mantiene le tre
   azioni principali.
 - La grafica principale non dipende da CDN e rimane disponibile offline.
+- La mappa richiede rete per i dati vettoriali; il selettore mantiene il fallback
+  offline già esistente.
 - Il riferimento viene usato solo come ispirazione: niente branding, testi o
   illustrazioni copiati.
