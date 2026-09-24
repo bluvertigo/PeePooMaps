@@ -10,7 +10,7 @@ export async function exportBackup(): Promise<void> {
   anchor.click(); URL.revokeObjectURL(url);
 }
 
-export async function importBackup(file: File): Promise<void> {
+export async function importBackup(file: Blob): Promise<void> {
   let parsed: unknown;
   try {
     parsed = JSON.parse(await file.text());

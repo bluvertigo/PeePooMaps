@@ -9,11 +9,12 @@ sincronizzazione remota prima di aver stabilizzato il dominio locale.
 | Fase | Obiettivo | Stato |
 | --- | --- | --- |
 | 0 | Fondazioni PWA e MVP locale | Completata |
-| 1 | Stabilizzazione dati, UX e test | Prossima |
-| 2 | Backup Google Drive | Prototipo implementato, da configurare e hardenizzare |
-| 3 | Accessibilità, privacy e installabilità | Da fare |
-| 4 | Preparazione backend e sincronizzazione | Decisione architetturale |
-| 5 | Beta e rilascio | Da fare |
+| 1 | Onboarding, mappa e navigazione principale | In corso |
+| 2 | Stabilizzazione dati, UX e test | Prossima |
+| 3 | Backup Google Drive | Prototipo implementato, da configurare e hardenizzare |
+| 4 | Accessibilità, privacy e installabilità | Da fare |
+| 5 | Preparazione backend e sincronizzazione | Decisione architetturale |
+| 6 | Beta e rilascio | Da fare |
 
 ## Regole di avanzamento
 
@@ -25,6 +26,8 @@ sincronizzazione remota prima di aver stabilizzato il dominio locale.
 
 ## Documenti
 
+- [`00-onboarding-navigation.md`](./00-onboarding-navigation.md): avvio senza personaggi,
+  mappa iniziale e azioni rapide per registrare gli eventi.
 - [`01-stabilization.md`](./01-stabilization.md): qualità del MVP locale e gestione dati.
 - [`02-drive-backup.md`](./02-drive-backup.md): configurazione e hardening del backup Drive.
 - [`03-privacy-accessibility.md`](./03-privacy-accessibility.md): accessibilità, privacy e PWA.
