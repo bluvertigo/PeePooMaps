@@ -14,7 +14,20 @@ export default defineConfig({
         theme_color: "#173b45",
         background_color: "#f5f2eb",
         display: "standalone",
-        icons: []
+        icons: [
+          {
+            src: "/pixel-art/toilet.svg",
+            sizes: "192x192",
+            type: "image/svg+xml",
+            purpose: "any"
+          },
+          {
+            src: "/pixel-art/toilet.svg",
+            sizes: "512x512",
+            type: "image/svg+xml",
+            purpose: "any maskable"
+          }
+        ]
       }
     })
   ]

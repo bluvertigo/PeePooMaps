@@ -10,7 +10,9 @@ local-first.
 - [ ] Rendere esplicita la retention locale e il comportamento di “cancella tutto”.
 - [ ] Verificare tastiera, focus, contrasto, screen reader, zoom 200% e target touch.
 - [ ] Aggiungere annunci `aria-live` per salvataggi, errori e stato offline.
-- [ ] Verificare icone PWA reali, splash/install prompt e aggiornamento service worker.
+- [x] Aggiungere l'icona PWA pixel-art del gabinetto e collegarla al manifest.
+- [ ] Verificare splash/install prompt su dispositivi fisici.
+- [x] Controllare il service worker all'apertura e al ritorno in primo piano della PWA.
 - [ ] Aggiungere fallback quando Leaflet non carica le tile e indicare il limite
       geografico della mappa.
 - [ ] Applicare una Content Security Policy compatibile con Leaflet, GIS e Drive.

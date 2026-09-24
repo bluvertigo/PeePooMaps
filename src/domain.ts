@@ -30,4 +30,13 @@ export interface BackupPayload {
   events: PooEvent[];
 }
 
-export const CHARACTER_ICONS = ["🐻", "🐱", "🐶", "🐸", "🦊", "🐼", "🐰", "🦄"];
+export const CHARACTER_OPTIONS = [
+  { icon: "👩", label: "girl" },
+  { icon: "👨", label: "boy" },
+  { icon: "👦", label: "kid" },
+  { icon: "👧", label: "kid" },
+  { icon: "🐶", label: "dog" },
+  { icon: "🐱", label: "cat" }
+] as const;
+
+export const CHARACTER_ICONS = CHARACTER_OPTIONS.map((option) => option.icon);

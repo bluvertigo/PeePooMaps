@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import type { Character, EventKind, PooEvent } from "./domain";
-import { CHARACTER_ICONS } from "./domain";
+import { CHARACTER_ICONS, CHARACTER_OPTIONS } from "./domain";
 import { requestCurrentLocation } from "./location";
 import type { Coordinates } from "./location";
 import MapPicker from "./MapPicker";
@@ -22,7 +22,7 @@ export default function App() {
   const [kind, setKind] = useState<EventKind>("pee");
   const [nickname, setNickname] = useState("");
   const [newName, setNewName] = useState("");
-  const [icon, setIcon] = useState(CHARACTER_ICONS[0]);
+  const [icon, setIcon] = useState<string>(CHARACTER_ICONS[0]);
   const [coordinates, setCoordinates] = useState<Coordinates>();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -194,7 +194,7 @@ export default function App() {
     </header>
 
     {showMap && <section className="card map-card">
-      <MapView events={events} />
+      <MapView events={events} characters={characters} />
     </section>}
 
     {message && <p className="status global-status" role="status">{message}</p>}
@@ -216,7 +216,9 @@ export default function App() {
       <h3>PERSONAGGI</h3>
       <form className="character-form" onSubmit={addCharacter}>
         <input aria-label="Nome personaggio" value={newName} onChange={(event) => setNewName(event.target.value)} maxLength={32} placeholder="Nome (es. Leo)" />
-        <select aria-label="Icona personaggio" value={icon} onChange={(event) => setIcon(event.target.value)}>{CHARACTER_ICONS.map((item) => <option key={item}>{item}</option>)}</select>
+        <select aria-label="Icona personaggio" value={icon} onChange={(event) => setIcon(event.target.value)}>
+          {CHARACTER_OPTIONS.map((option) => <option value={option.icon} key={option.icon}>{option.icon} {option.label}</option>)}
+        </select>
         <button className="secondary">AGGIUNGI</button>
       </form>
       <div className="character-list">{characters.map((character) => <div className="character" key={character.id}><span className="avatar">{character.icon}</span><strong>{character.name}</strong><button className="icon-button" aria-label={`Elimina ${character.name}`} onClick={() => void removeCharacter(character)}>×</button></div>)}</div>

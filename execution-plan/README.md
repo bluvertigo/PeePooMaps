@@ -9,8 +9,8 @@ sincronizzazione remota prima di aver stabilizzato il dominio locale.
 | Fase | Obiettivo | Stato |
 | --- | --- | --- |
 | 0 | Fondazioni PWA e MVP locale | Completata |
-| 1 | Onboarding, mappa e navigazione principale | In corso |
-| 2 | Identità visuale pixel art e asset | In corso |
+| 1 | Onboarding, mappa e navigazione principale | Completata |
+| 2 | Identità visuale pixel art, asset e mappa stilizzata | In corso |
 | 3 | Stabilizzazione dati, UX e test | Prossima |
 | 4 | Backup Google Drive | Prototipo implementato, da configurare e hardenizzare |
 | 5 | Accessibilità, privacy e installabilità | Da fare |

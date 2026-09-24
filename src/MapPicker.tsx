@@ -1,6 +1,8 @@
 import { type MouseEvent, useEffect, useRef, useState } from "react";
+import maplibregl from "maplibre-gl";
 import type { Coordinates } from "./location";
-import "leaflet/dist/leaflet.css";
+import { pixelMapStyle } from "./pixelMapStyle";
+import "maplibre-gl/dist/maplibre-gl.css";
 
 interface MapPickerProps {
   value?: Coordinates;
@@ -21,10 +23,18 @@ function coordinatesFromPoint(event: MouseEvent, element: HTMLElement): Coordina
   };
 }
 
+function createPin() {
+  const element = document.createElement("img");
+  element.className = "pixel-map-marker picker-marker";
+  element.src = "/pixel-art/map-pin.svg";
+  element.alt = "Punto selezionato";
+  return element;
+}
+
 export default function MapPicker({ value, onChange }: MapPickerProps) {
   const element = useRef<HTMLDivElement>(null);
-  const map = useRef<import("leaflet").Map>();
-  const marker = useRef<import("leaflet").Marker>();
+  const map = useRef<maplibregl.Map>();
+  const marker = useRef<maplibregl.Marker>();
   const [online, setOnline] = useState(navigator.onLine);
 
   useEffect(() => {
@@ -39,48 +49,58 @@ export default function MapPicker({ value, onChange }: MapPickerProps) {
   }, []);
 
   useEffect(() => {
-    let cancelled = false;
-    if (!online) return;
-    void import("leaflet").then((L) => {
-      if (cancelled || !element.current) return;
-      map.current = L.map(element.current, {
-        maxBounds: [[-85, -180], [85, 180]],
-        maxBoundsViscosity: 1
-      }).setView(
-        value ? [value.latitude, value.longitude] : [fallbackCenter.latitude, fallbackCenter.longitude],
-        value ? 13 : 5
-      );
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: '&copy; OpenStreetMap contributors',
-        errorTileUrl: ""
-      }).addTo(map.current);
-      map.current.on("click", (event: import("leaflet").LeafletMouseEvent) => {
-        onChange({ latitude: event.latlng.lat, longitude: event.latlng.lng });
-      });
-      if (value) marker.current = L.marker([value.latitude, value.longitude]).addTo(map.current);
+    if (!online || !element.current) return;
+
+    const currentValue = value;
+    const mapInstance = new maplibregl.Map({
+      container: element.current,
+      style: pixelMapStyle,
+      center: currentValue
+        ? [currentValue.longitude, currentValue.latitude]
+        : [fallbackCenter.longitude, fallbackCenter.latitude],
+      zoom: currentValue ? 13 : 5,
+      minZoom: 2,
+      maxZoom: 19,
+      dragRotate: false,
+      pitchWithRotate: false
     });
+    map.current = mapInstance;
+    mapInstance.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+    mapInstance.on("click", (event) => {
+      onChange({ latitude: event.lngLat.lat, longitude: event.lngLat.lng });
+    });
+
+    if (currentValue) {
+      marker.current = new maplibregl.Marker({ element: createPin(), anchor: "bottom" })
+        .setLngLat([currentValue.longitude, currentValue.latitude])
+        .addTo(mapInstance);
+    }
+
     return () => {
-      cancelled = true;
-      map.current?.remove();
-      map.current = undefined;
+      marker.current?.remove();
       marker.current = undefined;
+      mapInstance.remove();
+      map.current = undefined;
     };
   }, [online]);
 
   useEffect(() => {
     if (!map.current || !value) return;
-    marker.current?.setLatLng([value.latitude, value.longitude]);
-    if (!marker.current) {
-      void import("leaflet").then((L) => {
-        if (map.current && value) marker.current = L.marker([value.latitude, value.longitude]).addTo(map.current);
-      });
+    const position: [number, number] = [value.longitude, value.latitude];
+    if (marker.current) {
+      marker.current.setLngLat(position);
+    } else {
+      marker.current = new maplibregl.Marker({ element: createPin(), anchor: "bottom" })
+        .setLngLat(position)
+        .addTo(map.current);
     }
-    map.current.setView([value.latitude, value.longitude], Math.max(map.current.getZoom(), 13));
+    map.current.setCenter(position);
+    map.current.setZoom(Math.max(map.current.getZoom(), 13));
   }, [value]);
 
   return (
     <div className="picker-wrap">
-      {online && <div className="map-picker" ref={element} aria-label="Seleziona il punto dell'evento sulla mappa" />}
+      {online && <div className="map-picker pixel-map" ref={element} aria-label="Seleziona il punto dell'evento sulla mappa" />}
       <div
         className={online ? "offline-picker" : "offline-picker visible"}
         role="application"
